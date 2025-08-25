@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video Downloader</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: rgb(252, 243, 243); /* Pure black background */
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            /* cursor: none;  <-- Removed so default cursor shows */
+        }
+
+        .container {
+            background: rgb(0, 0, 0);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        input, select {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #ffeb3b; /* Yellow border */
+            border-radius: 5px;
+            text-align: center;
+            background: #333; /* Dark grey background */
+            color: #ffeb3b; /* Yellow text */
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease, border 0.3s ease;
+        }
+
+        select:hover, input:hover {
+            background: #444; /* Slightly lighter grey */
+            border-color: #fdd835; /* Brighter yellow */
+        }
+
+        select option {
+            background: black; /* Black background for options */
+            color: white; /* White text for readability */
+        }
+
+        button {
+            background: #ffeb3b;
+            color: black;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+            font-weight: bold;
+            margin: 5px;
+        }
+
+        button:hover {
+            background: #fdd835;
+            transform: scale(1.1);
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .loading div {
+            width: 15px;
+            height: 15px;
+            margin: 3px;
+            background: #ffeb3b;
+            border-radius: 50%;
+            display: inline-block;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Video Downloader</h2>
+        <form id="downloadForm" action="/download" method="post">
+            <input type="text" id="videoUrl" name="url" placeholder="Enter YouTube URL" required>
+            <br>
+            <select id="quality" name="quality">
+                <option value="144">144p</option>
+                <option value="360">360p</option>
+                <option value="720">720p</option>
+                <option value="1080" selected>1080p</option>
+            </select>
+            <br>
+            <button type="submit" onclick="showLoading()">Download</button>
+            <button type="button" onclick="clearInput()">Refresh</button>
+        </form>
+        <div class="loading" id="loading">
+            <div></div><div></div><div></div>
+        </div>
+    </div>
+
+    <script>
+        function showLoading() {
+            document.getElementById("loading").style.display = "block";
+            setTimeout(() => {
+                document.getElementById("loading").style.display = "none";
+            }, 5000);
+        }
+
+        function clearInput() {
+            document.getElementById("videoUrl").value = "";
+        }
+
+        // Removed sparkle cursor JS
+    </script>
+</body>
+</html>
